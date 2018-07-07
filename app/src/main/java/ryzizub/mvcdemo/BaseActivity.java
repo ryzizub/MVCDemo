@@ -1,30 +1,23 @@
-package com.example.ryzizub.mvcdemo.Control;
+package ryzizub.mvcdemo;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.example.ryzizub.mvcdemo.MainApplication;
-import com.example.ryzizub.mvcdemo.Model.BaseModel;
-import com.example.ryzizub.mvcdemo.View.BaseView;
+import ryzizub.mvcdemo.Model.BaseModel;
+import ryzizub.mvcdemo.View.BaseView;
 
-/**
- * Created by simonikd on 14.08.2017.
- *
- * Hlavní aktivita, se které všechny dědí
- * @param <M> - Model - Uložiště dat
- * @param <V> - View - Práce s UI
- */
-public abstract class BaseActivity<M extends BaseModel, V extends BaseView<M, ? extends BaseView.IViewCallbackBase>> extends Activity {
-    private MainApplication application;
+public abstract class BaseActivity<M extends BaseModel, V extends BaseView<M, ? extends BaseView.IViewCallbackBase>> extends AppCompatActivity {
+
+    private BaseApplication application;
     private V view;
     private M model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.application = (MainApplication) getApplication();
+        this.application = (BaseApplication) getApplication();
         this.model = createNewModel();
         this.view = createView();
 
@@ -65,7 +58,7 @@ public abstract class BaseActivity<M extends BaseModel, V extends BaseView<M, ? 
         return model;
     }
 
-    protected MainApplication getMainApplication() {
+    protected BaseApplication getMainApplication() {
         return application;
     }
 }
